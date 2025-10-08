@@ -32,7 +32,7 @@ public class SMP1TM1 : MonoBehaviour
     public GameObject ChipSnapPointObject; // object which has snappoint script on good cover
     public ChipToCover chipToCover;
 
-    [Header("Handle Should Be closed")]
+    [Header("Handle Should Be closed & Punching defect")]
     public GameObject PuncherSnapPointObject;
     public GameObject SphereObjectCoverOnPuncher;
     public CoverToPuncher coverToPuncher;
@@ -41,6 +41,19 @@ public class SMP1TM1 : MonoBehaviour
     public GameObject PunchingHandleScriptObject;
     public PuncherHandle puncherHandle;
     public XRGrabInteractable GrabCoverFromPunching;
+
+    [Header("Good Immobilizer")]
+    public StepWiseHighlighter GoodCover3FromTray;
+    public XRGrabInteractable GrabGoodCover3FromTray;
+    public Collider GoodChipCollider2;
+    public StepWiseHighlighter HighlightGoodChip2FromTray;
+    public XRGrabInteractable GrabGoodChip2FromTray;
+    public GameObject SphereChipObject2;
+    public GameObject ChipSnapPointObject2; // object which has snappoint script on good cover
+    public ChipToCover2 chipToCover2;
+    public GameObject PuncherSnapPointObject2;
+    public CoverToPuncher2 coverToPuncher2;
+
 
     private int drawerOpenCount = 0;
     private int drawerCloseCount = 0;
@@ -57,6 +70,8 @@ public class SMP1TM1 : MonoBehaviour
         sideHandle.onReachedDesired += SideHandleClosed;
         puncherHandle.onReachedOriginal += PunchingDone;
         sideHandle.onReachedOriginal += SideHandleOpened;
+        chipToCover2.Chipsnapped += GoodChip2SnappedToGoodCover3;
+        coverToPuncher2.CoversnappedToPunching += Cover3SnappedToPunching;
     }
     private void OnDrawerOpenedDynamic()
     {
@@ -278,6 +293,10 @@ public class SMP1TM1 : MonoBehaviour
         tooltipActivator.ActivateObject(7);
         arrowActivator.ActivateObject(1);
         tooltipActivator.ActivateObject(0);
+        LockingHandleScriptObject.SetActive(false);
+        PunchingHandleScriptObject.SetActive(false);
+
+
     }
     public void ThirdDrawerOpen()
     {
@@ -305,7 +324,63 @@ public class SMP1TM1 : MonoBehaviour
     {
         tooltipActivator.DeactivateObject(1); // tooltip to close the NG drawer
         NGDefectSnapPointObject.SetActive(false);
+        arrowActivator.ActivateObject(9);
+        GoodCover3FromTray.Highlight();
+        GrabGoodCover3FromTray.enabled = true;
+    }
+    public void GoodCover3GrabbedFromTray()
+    {
+        arrowActivator.DeactivateObject(9);
+        arrowActivator.ActivateObject(10);
+        GoodChipCollider2.enabled = true;
+        HighlightGoodChip2FromTray.Highlight();
+        GrabGoodChip2FromTray.enabled=true;
+    }
+    public void GoodChip2GrabbedFromTray()
+    {
+        arrowActivator.DeactivateObject(10);
+        SphereChipObject2.SetActive(true);
+        ChipSnapPointObject2.SetActive(true);
 
     }
+    public void GoodChip2SnappedToGoodCover3()
+    {
+        SphereChipObject2.SetActive(false);
+        PuncherSnapPointObject2.SetActive(true);
+        SphereObjectCoverOnPuncher.SetActive(true);
+        arrowActivator.ActivateObject(11);
+
+    }
+    public void Cover3SnappedToPunching()
+    {
+        SphereObjectCoverOnPuncher.SetActive(false);
+          LockingHandleScriptObject.SetActive(true);
+        tooltipActivator.ActivateObject(3);
+    }
+
+    // use new script
+    public void SideHandleClosed2()
+    {
+        tooltipActivator.DeactivateObject(3);
+        tooltipActivator.ActivateObject(4);
+    }
+    public void OkButtonForToggleClampChecking2()
+    {
+        tooltipActivator.DeactivateObject(4);
+        PunchingHandleScriptObject.SetActive(true);
+        tooltipActivator.ActivateObject(5);
+    }
+    public void PunchingDone2()
+    {
+        tooltipActivator.ActivateObject(6);
+        sideHandle.Unlock();
+    }
+    public void SideHandleOpened2()
+    {
+        tooltipActivator.DeactivateObject(6);
+        GrabCoverFromPunching.enabled = true;
+        arrowActivator.ActivateObject(8);
+    }
+    
 
 }
