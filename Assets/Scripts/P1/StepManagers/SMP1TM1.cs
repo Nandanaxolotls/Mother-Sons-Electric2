@@ -53,6 +53,14 @@ public class SMP1TM1 : MonoBehaviour
     public ChipToCover2 chipToCover2;
     public GameObject PuncherSnapPointObject2;
     public CoverToPuncher2 coverToPuncher2;
+    public GameObject LockingHandleScriptObject2;
+    public GameObject PunchingHandleScriptObject2;
+    public M1SideHandle2 sideHandle2;
+    public M1PuncherHandle2 m1PuncherHandle2;
+    public XRGrabInteractable GrabCoverFromPunching2;
+    public StepWiseHighlighter HighlightCover2AfterPunching;
+
+    public GameObject NGBOXdeactivate;
 
 
     private int drawerOpenCount = 0;
@@ -72,6 +80,9 @@ public class SMP1TM1 : MonoBehaviour
         sideHandle.onReachedOriginal += SideHandleOpened;
         chipToCover2.Chipsnapped += GoodChip2SnappedToGoodCover3;
         coverToPuncher2.CoversnappedToPunching += Cover3SnappedToPunching;
+        sideHandle2.onReachedDesired += SideHandleClosed2;
+        m1PuncherHandle2.onReachedOriginal += PunchingDone2;
+        sideHandle2.onReachedOriginal += SideHandleOpened2;
     }
     private void OnDrawerOpenedDynamic()
     {
@@ -269,6 +280,7 @@ public class SMP1TM1 : MonoBehaviour
     {
         tooltipActivator.DeactivateObject(3);
         tooltipActivator.ActivateObject(4);
+
     }
     public void OkButtonForToggleClampChecking()
     {
@@ -286,6 +298,7 @@ public class SMP1TM1 : MonoBehaviour
         tooltipActivator.DeactivateObject(6);
         GrabCoverFromPunching.enabled = true;
         arrowActivator.ActivateObject(8);
+        sideHandle.PermanantlyLock();
     }
     public void CoverGrabbedFromPunching()
     {
@@ -353,8 +366,9 @@ public class SMP1TM1 : MonoBehaviour
     }
     public void Cover3SnappedToPunching()
     {
+        arrowActivator.DeactivateObject(11);
         SphereObjectCoverOnPuncher.SetActive(false);
-          LockingHandleScriptObject.SetActive(true);
+        LockingHandleScriptObject2.SetActive(true);
         tooltipActivator.ActivateObject(3);
     }
 
@@ -362,25 +376,29 @@ public class SMP1TM1 : MonoBehaviour
     public void SideHandleClosed2()
     {
         tooltipActivator.DeactivateObject(3);
-        tooltipActivator.ActivateObject(4);
-    }
-    public void OkButtonForToggleClampChecking2()
-    {
-        tooltipActivator.DeactivateObject(4);
-        PunchingHandleScriptObject.SetActive(true);
         tooltipActivator.ActivateObject(5);
+        PunchingHandleScriptObject2.SetActive(true);
     }
+    //public void OkButtonForToggleClampChecking2()
+    //{
+    //    tooltipActivator.DeactivateObject(4);
+    //    PunchingHandleScriptObject2.SetActive(true);
+    //    tooltipActivator.ActivateObject(5);
+    //}
     public void PunchingDone2()
     {
         tooltipActivator.ActivateObject(6);
-        sideHandle.Unlock();
+        sideHandle2.Unlock();
     }
     public void SideHandleOpened2()
     {
         tooltipActivator.DeactivateObject(6);
-        GrabCoverFromPunching.enabled = true;
+        GrabCoverFromPunching2.enabled = true;
         arrowActivator.ActivateObject(8);
-    }
+        sideHandle2.PermanantlyLock();
+        HighlightCover2AfterPunching.Highlight();
+        NGBOXdeactivate.SetActive(true );
+}
     
 
 }
