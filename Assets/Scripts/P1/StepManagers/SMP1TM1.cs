@@ -397,8 +397,12 @@ public class SMP1TM1 : MonoBehaviour
         arrowActivator.ActivateObject(8);
         sideHandle2.PermanantlyLock();
         HighlightCover2AfterPunching.Highlight();
-        NGBOXdeactivate.SetActive(true );
-}
-    
+        NGBOXdeactivate.SetActive(false );
+    }
+    public void GoodCoverGrabbedFromPunching()
+    {
+        arrowActivator.DeactivateObject(8);
+    }
+
 
 }
