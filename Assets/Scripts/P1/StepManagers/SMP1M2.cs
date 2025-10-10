@@ -28,6 +28,16 @@ public class SMP1M2 : MonoBehaviour
     [Header("Solder Ball and NO solder defects")]
     public GameObject ActivateThirdObjectFromPunching;
     public GameObject SnapPointObjectOfCoverOnSoldering3;
+    public CoverToSoldering3 coverToSoldering3;
+    public GameObject tooltipOfDefect3;
+    public XRGrabInteractable GrabChipWithDefect3;
+
+    [Header("Good Final")]
+    public GameObject ActivateGoodObjectFromPunching;
+    public GameObject SnapPointObjectOfCoverOnSoldering4;
+    public CoverToSoldering4 coverToSoldering4;
+    public XRGrabInteractable GrabChipWithDefect4;
+
 
     private int SolderingDoneCount = 0;
     private int drawerOpenCount = 0;
@@ -45,6 +55,8 @@ public class SMP1M2 : MonoBehaviour
         nGdrawer.onReachedOriginal += OnDrawerClosedDynamic;
         nG2SnapPoint.OnObjectActivated += OnDefectSnappedToNGDynamic;
         coverToSoldering2.CoversnappedToSoldering2 += CoverSnappedToSoldering2;
+        coverToSoldering3.CoversnappedToSoldering3 += CoverSnappedToSoldering3;
+        coverToSoldering4.CoversnappedToSoldering4 += CoverSnappedToSoldering4;
     }
 
     private void OnSolderingCompletedDynamic()
@@ -59,10 +71,10 @@ public class SMP1M2 : MonoBehaviour
                 SolderingDone1();
                 break;
             case 2:
-                //SolderingDone2();
+                SolderingDone2();
                 break;
             case 3:
-                // ThirdDrawerOpen();
+                SolderingDone3();
 
                 break;
             default:
@@ -86,7 +98,7 @@ public class SMP1M2 : MonoBehaviour
                 SecondDrawerOpen();
                 break;
             case 3:
-                //ThirdDrawerOpen();
+                ThirdDrawerOpen();
                 break;
             default:
                 Debug.Log("Drawer opened again, beyond the third time.");
@@ -105,7 +117,7 @@ public class SMP1M2 : MonoBehaviour
                 SecondDrawerClosed();
                 break;
             case 3:
-                //ThirdDrawerClosed();
+                ThirdDrawerClosed();
                 break;
             default:
                 Debug.Log("Drawer closed again, beyond the third time.");
@@ -130,7 +142,7 @@ public class SMP1M2 : MonoBehaviour
                 break;
 
             case 3:
-                //PinBentAfterPunching(obj);
+                NSSBDefect3SnappedToNGbox(obj);
                 break;
 
             default:
@@ -252,16 +264,84 @@ public class SMP1M2 : MonoBehaviour
         HighlightChipOnSoldering1.Highlight();
         SnapPointObjectOfCoverOnSoldering3.SetActive(true);
     }
+    public void CoverSnappedToSoldering3()
+    {
+        SphereObjectChipOnSoldering1.SetActive(false);
+        arrowActivator.DeactivateObject(15);
+        tooltipActivator.ActivateObject(13);
+        solderingMachine.enabled = true;
+    }
+   private void SolderingDone2()
+    {
+        SolderingCompleted2();
+    }
+    public void SolderingCompleted2()
+    {
+        arrowActivator.ActivateObject(15);
+        GrabChipWithDefect3.enabled = true;
+    }
+    public void DefectCoverGrabbedFromSoldering3()
+    {
+        arrowActivator.DeactivateObject(15);
+        tooltipOfDefect3.SetActive(true);
+        arrowActivator.ActivateObject(1);
+        tooltipActivator.ActivateObject(0);
+    }
+    private void ThirdDrawerOpen()
+    {
+        NGdrawerOpened3();
+    }
+    public void NGdrawerOpened3()
+    {
+        tooltipActivator.DeactivateObject(0);
+        arrowActivator.DeactivateObject(1);
+        arrowActivator.ActivateObject(2);
+        NGDefectSnapPointObject2.SetActive(true);
+    }
+    public void NSSBDefect3SnappedToNGbox(GameObject obj)
+    {
+        arrowActivator.DeactivateObject(2);
+        tooltipActivator.ActivateObject(1);
+        nGdrawer.Unlock();
+    }
+    private void ThirdDrawerClosed()
+    {
+        NGdrawerClosed3();
+    }
+    public void NGdrawerClosed3()
+    {
+        tooltipActivator.DeactivateObject(1);
+        arrowActivator.ActivateObject(8);
+        ActivateGoodObjectFromPunching.SetActive(true);
+    }
+    public void GrabbedFourthObjectFromPunching()
+    {
+        arrowActivator.DeactivateObject(8);
+        arrowActivator.ActivateObject(15);
+        SphereObjectChipOnSoldering1.SetActive(true);
+        HighlightChipOnSoldering1.Highlight();
+        SnapPointObjectOfCoverOnSoldering4.SetActive(true);
+    }
+    public void CoverSnappedToSoldering4()
+    {
+        SphereObjectChipOnSoldering1.SetActive(false);
+        arrowActivator.DeactivateObject(15);
+        tooltipActivator.ActivateObject(13);
+        solderingMachine.enabled = true;
+    }
+    private void SolderingDone3()
+    {
+        SolderingCompleted3();
+    }
+    public void SolderingCompleted3()
+    {
+        arrowActivator.ActivateObject(15);
+        GrabChipWithDefect4.enabled = true;
+    }
+    public void GoodCoverGrabbedFromSoldering4()
+    {
+        arrowActivator.DeactivateObject(15);
+    }
 
 
-    //tooltipActivator.ActivateObject(13);
-
-    //private void SolderingDone2()
-    //{
-    //    SolderingCompleted2();
-    //}
-    //public void SolderingCompleted2()
-    //{
-
-    //}
 }
