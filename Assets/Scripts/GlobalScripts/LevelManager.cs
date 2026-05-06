@@ -7,6 +7,7 @@ public class LevelMAnager : MonoBehaviour
 {
     public GameObject LevelSelectionPanel;
     public GameObject LevelSelectionPanel2;
+    public GameObject TestLevelSelection;
 
     public void toggleTutorialState(bool _state)
     {
@@ -18,11 +19,19 @@ public class LevelMAnager : MonoBehaviour
         LevelSelectionPanel2.SetActive(false);
         LevelSelectionPanel.SetActive(true);
     }
+    public void LevelSelectionTest()
+    {
+        LevelSelectionPanel2.SetActive(false);
+        TestLevelSelection.SetActive(true);
+        
+    }
 
     public void BackTo1And2()
     {
         LevelSelectionPanel2.SetActive(true);
         LevelSelectionPanel.SetActive(false);
+        TestLevelSelection.SetActive(false);
+
     }
 
     public void ToggleScene(string name)

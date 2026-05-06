@@ -104,7 +104,10 @@ public class Drawer2 : MonoBehaviour
         {
             isLocked = true;
             onReachedDesired?.Invoke();
-            stepManagerP2.DoorClosed();
+            if (stepManagerP2 != null)
+            {
+                stepManagerP2.DoorClosed();
+            }
         }
         else
         {

@@ -8,7 +8,7 @@ public class PunchingMachine2 : MonoBehaviour
     [Header("References")]
     public Transform targetObject;    // Object 1: rotates in Z
     public Transform targetObject2;   // Object 2: moves in Y
-    public Transform targetObject3;   // Object 3: moves in Z
+ //   public Transform targetObject3;   // Object 3: moves in Z
     public GameManager gameManager;
     public GameObject Tooltip8;
 
@@ -53,11 +53,11 @@ public class PunchingMachine2 : MonoBehaviour
             targetObject2.localPosition = new Vector3(pos.x, moveYStart, pos.z);
         }
 
-        if (targetObject3 != null)
-        {
-            Vector3 pos = targetObject3.localPosition;
-            targetObject3.localPosition = new Vector3(pos.x, pos.y, moveZStart);
-        }
+        //if (targetObject3 != null)
+        //{
+        //    Vector3 pos = targetObject3.localPosition;
+        //    targetObject3.localPosition = new Vector3(pos.x, pos.y, moveZStart);
+        //}
     }
 
     public void OnHoverEntered(HoverEnterEventArgs args) => isHovered = true;
@@ -82,7 +82,7 @@ public class PunchingMachine2 : MonoBehaviour
         if (Tooltip8 != null) Tooltip8.SetActive(false);
 
         // Step 1: Move Object3 forward
-        yield return StartCoroutine(MoveZ(targetObject3, moveZStart, moveZEnd));
+      //  yield return StartCoroutine(MoveZ(targetObject3, moveZStart, moveZEnd));
 
         // Step 2: Move Object1 + Object2 simultaneously
         yield return StartCoroutine(RunSimultaneous(
@@ -104,9 +104,13 @@ public class PunchingMachine2 : MonoBehaviour
         Button2.SetActive(false);
         Button3.SetActive(true);
         // Step 4: Return Object3 to original
-        yield return StartCoroutine(MoveZ(targetObject3, moveZEnd, moveZStart));
+        //yield return StartCoroutine(MoveZ(targetObject3, moveZEnd, moveZStart));
         Locked = true;
         isRunning = false;
+    }
+    public void Unlock()
+    {
+        Locked = false;
     }
 
     private IEnumerator RunSimultaneous(IEnumerator a, IEnumerator b)

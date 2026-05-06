@@ -29,6 +29,8 @@ public class SoundManager : MonoBehaviour
 
     public void PlayVoiceOver(int level, int step, TMP_Text subtitleTxt)
     {
+        // Stop any currently playing voice-over
+        _sourceVoiceOver.Stop();
         subtitleTxt.gameObject.SetActive(true);
         subtitleTxt.text = GameManager.Instance.levelDatas[level].voiceOverDatas[step].subText;
         if (PlayerPrefs.GetInt("isEnglish", 0) == 0)

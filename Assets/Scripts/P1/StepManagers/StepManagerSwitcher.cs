@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class StepManagerSwitcher : MonoBehaviour
 {
@@ -23,5 +24,30 @@ public class StepManagerSwitcher : MonoBehaviour
         StepManagerM2.SetActive(false);
         StepManagerM3.SetActive(true);
     }
-   
+    public void Machine3Completed()
+    {
+        StepManagerM3.SetActive(false);
+        StepManagerM4.SetActive(true);
+    }
+    public void Machine4Completed()
+    {
+        StepManagerM4.SetActive(false);
+        StepManagerM5.SetActive(true);
+    }
+    public void Machine5Completed()
+    {
+        StepManagerM5.SetActive(false);
+        StepManagerM6.SetActive(true);
+    }
+    public void Nextlevel(string name)
+    {
+        SceneManager.LoadScene(name);
+    }
+
+    public void RestartGame()
+    {
+        string currentSceneName = SceneManager.GetActiveScene().name;
+        SceneManager.LoadScene(currentSceneName);
+    }
+
 }

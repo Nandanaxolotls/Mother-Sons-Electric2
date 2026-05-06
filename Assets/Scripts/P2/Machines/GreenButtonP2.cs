@@ -12,6 +12,12 @@ public class GreenButtonP2 : MonoBehaviour
     public GameObject Button1;
     public GameObject Button2;
     public GameObject Tooltip7;
+    [Header("HMI screen")]
+    public GameObject PanelDefault;
+    public GameObject PanelFirst;
+    public GameObject PanelSecond;
+
+
     [Header("Input")]
     public InputActionProperty selectAction;
     private bool isHovered = false;
@@ -45,9 +51,14 @@ public class GreenButtonP2 : MonoBehaviour
     {
         Tooltip7.SetActive(false);
         Button1.SetActive(true);
+        PanelDefault.SetActive(false);
+        PanelFirst.SetActive(true);
+        PanelSecond.SetActive(false);
         yield return new WaitForSeconds(3f);
         Button1.SetActive(true);
         Button2 .SetActive(true);
+        PanelFirst.SetActive(false);
+        PanelSecond.SetActive(true);
         CameraChecked?.Invoke();
     }
 }

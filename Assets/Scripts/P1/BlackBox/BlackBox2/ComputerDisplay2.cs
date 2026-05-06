@@ -15,7 +15,7 @@ public class ComputerDisplay2 : MonoBehaviour
     public GameObject Button3;
     public TMP_Text countdownText;  // Assign your UI text (TextMeshProUGUI)
     public GameObject ToolTip19;
-
+    public event System.Action onProcessCompleted;
     [Header("Settings")]
     public int countdownTime = 5;   // Adjustable countdown duration
 
@@ -80,6 +80,7 @@ public class ComputerDisplay2 : MonoBehaviour
         Button2.SetActive(false);
         Button3.SetActive(true);
         door2.Unlock();
+        onProcessCompleted?.Invoke();
         if (ToolTip19 != null)
         {
             ToolTip19.SetActive(true);

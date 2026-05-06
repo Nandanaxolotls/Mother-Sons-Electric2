@@ -3,7 +3,7 @@ using UnityEngine;
 public class ElectricMagnifying : MonoBehaviour
 {
     [Header("Game Manager Reference")]
-    public StepManagerP1 gameManager; // Assign in inspector
+    public SMP1M4 gameManager; // Assign in inspector
 
     [Header("Player Tag")]
     public string playerTag = "Player"; // Make sure your player has this tag

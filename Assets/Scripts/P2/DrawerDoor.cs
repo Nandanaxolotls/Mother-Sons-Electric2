@@ -8,7 +8,7 @@ public class DrawerDoor : MonoBehaviour
     [Header("References")]
     public Transform object1; // will move on X
     public Transform object2; // will rotate on X
-    public StepManagerP2 stepManagerP2;
+                              // public SMP2TM1 stepManagerP2;
     public GameObject Tooltip1;
 
     [Header("Target Values")]
@@ -55,9 +55,8 @@ public class DrawerDoor : MonoBehaviour
     private void TogglePosition()
     {
         if (Tooltip1 != null)
-        {
             Tooltip1.SetActive(false);
-        }
+
         if (isPermanantlyLocked) return;
         if (isInDesiredPosition && isLocked) return;
 
@@ -66,6 +65,7 @@ public class DrawerDoor : MonoBehaviour
 
         if (!isInDesiredPosition)
         {
+            // Going to desired position: Move ? Rotate
             activeRoutine = StartCoroutine(MoveThenRotate(
                 new Vector3(object1TargetX, object1OriginalPos.y, object1OriginalPos.z),
                 Quaternion.Euler(object2TargetXRot, 0f, 0f),
@@ -74,10 +74,10 @@ public class DrawerDoor : MonoBehaviour
         }
         else
         {
-            activeRoutine = StartCoroutine(MoveThenRotate(
+            // Returning to original: Rotate ? Move
+            activeRoutine = StartCoroutine(RotateThenMove(
                 object1OriginalPos,
-                object2OriginalRot,
-                false
+                object2OriginalRot
             ));
         }
 
@@ -115,19 +115,44 @@ public class DrawerDoor : MonoBehaviour
         {
             isLocked = true;
             onReachedDesired?.Invoke();
-            stepManagerP2.DoorClosed();
+            // stepManagerP2.DoorClosed();
         }
-        else
+    }
+
+    private IEnumerator RotateThenMove(Vector3 targetPos1, Quaternion targetRot2)
+    {
+        // --- Step 1: Rotate object2 first ---
+        Quaternion startRot2 = object2.localRotation;
+        float elapsed = 0f;
+        while (elapsed < rotateDuration)
         {
-            onReachedOriginal?.Invoke();
-           // stepManagerP2.DoorClosed();
+            elapsed += Time.deltaTime;
+            float t = Mathf.Clamp01(elapsed / rotateDuration);
+            object2.localRotation = Quaternion.Slerp(startRot2, targetRot2, t);
+            yield return null;
         }
+        object2.localRotation = targetRot2;
+
+        // --- Step 2: Move object1 ---
+        Vector3 startPos1 = object1.localPosition;
+        elapsed = 0f;
+        while (elapsed < moveDuration)
+        {
+            elapsed += Time.deltaTime;
+            float t = Mathf.Clamp01(elapsed / moveDuration);
+            object1.localPosition = Vector3.Lerp(startPos1, targetPos1, t);
+            yield return null;
+        }
+        object1.localPosition = targetPos1;
+
+        // --- Step 3: Event ---
+        onReachedOriginal?.Invoke();
+        isLocked = false;
     }
 
     public void Unlock()
     {
         isLocked = false;
-       
     }
 
     public void PermanantlyLock()

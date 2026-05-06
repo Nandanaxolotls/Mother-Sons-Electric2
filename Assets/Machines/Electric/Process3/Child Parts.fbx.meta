@@ -93,27 +93,27 @@ ModelImporter:
       type: UnityEngine:Texture2D
       assembly: UnityEngine.CoreModule
       name: Steel_brushed
-    second: {fileID: 2800000, guid: 9ef64311c0999df4f9dfe0b338294699, type: 3}
+    second: {fileID: 2800000, guid: 4acd44a178ae2a24da6933c5d2b5d1f7, type: 3}
   - first:
       type: UnityEngine:Texture2D
       assembly: UnityEngine.CoreModule
       name: Steel_brushed_Normal000
-    second: {fileID: 2800000, guid: 8e04c2d8e60b64341b6cc38a903ebbbc, type: 3}
+    second: {fileID: 2800000, guid: 5e716f7f1b156124084e76819b95d392, type: 3}
   - first:
       type: UnityEngine:Texture2D
       assembly: UnityEngine.CoreModule
       name: Steel_brushed_goold
-    second: {fileID: 2800000, guid: 459aed861b890214386afe04a91c733c, type: 3}
+    second: {fileID: 2800000, guid: f7b666f3cb0f1fd4f954273d07ec37e6, type: 3}
   - first:
       type: UnityEngine:Texture2D
       assembly: UnityEngine.CoreModule
       name: Unten_pcbV1000-A
-    second: {fileID: 2800000, guid: 632a4acc87b4f1b47ac7d5592cb3e09e, type: 3}
+    second: {fileID: 2800000, guid: 3530855117976314881e65b187364ceb, type: 3}
   - first:
       type: UnityEngine:Texture2D
       assembly: UnityEngine.CoreModule
       name: oben_pcbV1000-A
-    second: {fileID: 2800000, guid: cf60cd4424c92b84c9511d89c9ab550d, type: 3}
+    second: {fileID: 2800000, guid: cf4c8551235908b4d962534f4c56a31a, type: 3}
   materials:
     materialImportMode: 2
     materialName: 0
@@ -146,15 +146,15 @@ ModelImporter:
   meshes:
     lODScreenPercentages: []
     globalScale: 1
-    meshCompression: 0
+    meshCompression: 2
     addColliders: 0
     useSRGBMaterialColor: 1
     sortHierarchyByName: 1
     importPhysicalCameras: 1
-    importVisibility: 1
-    importBlendShapes: 1
-    importCameras: 1
-    importLights: 1
+    importVisibility: 0
+    importBlendShapes: 0
+    importCameras: 0
+    importLights: 0
     nodeNameCollisionStrategy: 1
     fileIdsGeneration: 2
     swapUVChannels: 0
@@ -188,7 +188,7 @@ ModelImporter:
     blendShapeNormalImportMode: 1
     normalSmoothingSource: 0
   referencedClips: []
-  importAnimation: 1
+  importAnimation: 0
   humanDescription:
     serializedVersion: 3
     human: []

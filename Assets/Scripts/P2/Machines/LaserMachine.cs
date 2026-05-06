@@ -5,7 +5,7 @@ public class LaserMachine : MonoBehaviour
 {
     [Header("References")]
     public Transform object1; // Moves on X
-    public Transform object2; // Moves on Z
+
 
     [Header("Target Movement Values")]
     public float object1XEnd = 2f;  // target local X for object1
@@ -21,7 +21,7 @@ public class LaserMachine : MonoBehaviour
     private void Start()
     {
         if (object1 != null) object1StartPos = object1.localPosition;
-        if (object2 != null) object2StartPos = object2.localPosition;
+
     }
 
     // Called from another script
@@ -37,16 +37,16 @@ public class LaserMachine : MonoBehaviour
             MoveToPosition(object1, new Vector3(object1XEnd, object1StartPos.y, object1StartPos.z))
         );
 
-        // Step 2: Then move object2
-        yield return StartCoroutine(
-            MoveToPosition(object2, new Vector3(object2StartPos.x, object2StartPos.y, object2ZEnd))
-        );
+        //// Step 2: Then move object2
+        //yield return StartCoroutine(
+        //    MoveToPosition(object2, new Vector3(object2StartPos.x, object2StartPos.y, object2ZEnd))
+        //);
 
         // Step 3: Wait while object2 is in place
         yield return new WaitForSeconds(5f);
 
         // Step 4: Move object2 back
-        yield return StartCoroutine(MoveToPosition(object2, object2StartPos));
+        //yield return StartCoroutine(MoveToPosition(object2, object2StartPos));
 
         // Step 5: Then move object1 back
         yield return StartCoroutine(MoveToPosition(object1, object1StartPos));

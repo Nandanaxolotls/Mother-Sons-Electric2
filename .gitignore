@@ -1,34 +1,108 @@
-# Unity generated folders
+# ================= UNITY =================
 [Ll]ibrary/
 [Tt]emp/
 [Oo]bj/
-[Bb]uild*/
+[Bb]uild/
+[Bb]uilds/
 [Ll]ogs/
 UserSettings/
 MemoryCaptures/
 
-# IDE / editor settings
-.vscode/
-.idea/
+# Asset import pipeline
+Assets/AssetStoreTools*
+
+# ================= VERSION CONTROL =================
+.git/
+
+# ================= IDE =================
 .vs/
-
-# OS files
-.DS_Store
-Thumbs.db
-
-# Visual Studio / Rider
+.idea/
+.vscode/
 *.csproj
 *.sln
-*.user
 *.suo
+*.tmp
+*.user
+*.userprefs
 *.pidb
 *.booproj
+*.svd
+*.pdb
+*.mdb
+*.opendb
+*.VC.db
+*.VC.opendb
 
-# Builds & packages
+# ================= ANDROID =================
 *.apk
 *.aab
-*.unitypackage
-*.app
+*.obb
+.gradle/
+local.properties
+*.keystore
+*.jks
 
-# Crash logs
+# Unity Android build cache
+Assets/Plugins/Android/*/build/
+Assets/Plugins/Android/*/gradle/
+
+# ================= iOS =================
+*.ipa
+*.xcworkspace/
+*.xcuserdata/
+DerivedData/
+
+# ================= LOGS =================
+*.log
+*.stacktrace
 crash.log
+
+# ================= CACHE =================
+Library/com.unity.addressables/
+UnityPackageManager/
+packages-lock.json
+
+# ================= OS FILES =================
+Thumbs.db
+desktop.ini
+.DS_Store
+.AppleDouble
+.LSOverride
+
+# ================= FIREBASE =================
+Assets/firebase_unity_sdk/
+Assets/Plugins/iOS/Firebase/
+Assets/Plugins/tvOS/Firebase/
+Assets/Firebase/Plugins/x86_64/
+Assets/Firebase/m2repository/
+
+# ================= IL2CPP BUILD OUTPUT =================
+*_BackUpThisFolder_ButDontShipItWithYourGame/
+*_DoNotShip*/
+
+# ================= BINARY ASSETS =================
+*.a
+*.srcaar
+*.dylib
+*.so
+*.framework/
+
+# ================= SECRETS =================
+Assets/credentials.json
+Assets/credentials.json.meta
+google-services.json
+GoogleService-Info.plist
+
+# ================= PHOTON =================
+Assets/Photon Unity Networking/Demos/
+Assets/PhotonChatApi/Demos/
+Assets/PhotonUnityNetworking/Demos/
+
+# ================= OPTIONAL =================
+Assets/**/Demo*/
+Assets/**/Samples*/
+
+# ================= IMPORTANT =================
+!Assets/
+!ProjectSettings/
+!Packages/

@@ -16,6 +16,8 @@ public class RemoteKeyOnLaserSnapPoint : MonoBehaviour
     public Vector3 rotationOffset;
 
     public GameObject objectToActivateAfterSnap;
+    public GameObject objectToActivateAfterSnap2;
+
 
     [Header("Snap Options")]
     [Tooltip("If enabled, the snapped object cannot be picked up again after snapping.")]
@@ -71,13 +73,18 @@ public class RemoteKeyOnLaserSnapPoint : MonoBehaviour
 
         if (objectToActivateAfterSnap != null)
         {
-            // objectToActivateAfterSnap.transform.position = snapPosition;
-            // objectToActivateAfterSnap.transform.rotation = snapRotationQuat;
             objectToActivateAfterSnap.SetActive(true);
-            RemoteKeySnapped?.Invoke(); // Notify StepManager
-                                        // ? Find and start the sequential snap process
-
         }
+
+        // Optional second object
+        if (objectToActivateAfterSnap2 != null)
+        {
+            objectToActivateAfterSnap2.SetActive(true);
+        }
+
+        // Fire event only if at least one is valid (optional)
+        RemoteKeySnapped?.Invoke();
+
 
         if (socketInteractor != null)
             socketInteractor.enabled = false;

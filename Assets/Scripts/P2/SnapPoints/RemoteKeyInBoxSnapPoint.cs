@@ -16,6 +16,7 @@ public class RemoteKeyInBoxSnapPoint : MonoBehaviour
     public Vector3 rotationOffset;
 
     public GameObject objectToActivateAfterSnap;
+    public GameObject objectToActivateAfterSnap2;
 
     [Header("Snap Options")]
     [Tooltip("If enabled, the snapped object cannot be picked up again after snapping.")]
@@ -74,6 +75,7 @@ public class RemoteKeyInBoxSnapPoint : MonoBehaviour
             // objectToActivateAfterSnap.transform.position = snapPosition;
             // objectToActivateAfterSnap.transform.rotation = snapRotationQuat;
             objectToActivateAfterSnap.SetActive(true);
+            objectToActivateAfterSnap2.SetActive(true);
             RemoteKeySnappedToBox?.Invoke(); // Notify StepManager
                                              // ? Find and start the sequential snap process
 

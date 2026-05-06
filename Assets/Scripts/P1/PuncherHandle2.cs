@@ -13,6 +13,10 @@ public class PuncherHandle2 : MonoBehaviour
     public GameObject Tooltip2;
 
     [Header("Target Rotation Values (for targetObject)")]
+    public float targetY = 90f;   // starting Z (e.g., 90)
+    public float oppositeY = -90f; // opposite Z (e.g., -90)
+
+    [Header("Target Rotation Values (for targetObject)")]
     public float targetZ = 90f;   // starting Z (e.g., 90)
     public float oppositeZ = -90f; // opposite Z (e.g., -90)
 
@@ -42,7 +46,7 @@ public class PuncherHandle2 : MonoBehaviour
     {
         if (targetObject != null)
         {
-            targetObject.localEulerAngles = new Vector3(0f, -90f, targetZ);
+            targetObject.localEulerAngles = new Vector3(0f, targetY, targetZ);
         }
 
         if (targetObject2 != null)
@@ -98,10 +102,10 @@ public class PuncherHandle2 : MonoBehaviour
     private IEnumerator RotateStepwise(float fromZ, float toZ, bool goingToDesired)
     {
         // Step 1: rotate from current to 0
-        yield return StartCoroutine(SmoothRotate(new Vector3(0f, -90f, 0f)));
+        yield return StartCoroutine(SmoothRotate(new Vector3(0f, targetY, 0f)));
 
         // Step 2: rotate from 0 to destination
-        yield return StartCoroutine(SmoothRotate(new Vector3(0f, -90f, toZ)));
+        yield return StartCoroutine(SmoothRotate(new Vector3(0f, targetY, toZ)));
 
         // ? Invoke after finishing
         if (goingToDesired)

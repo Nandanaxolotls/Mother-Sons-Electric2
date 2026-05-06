@@ -8,7 +8,7 @@ public class GameAPIs : MonoBehaviour
 
 {
 
-    public static string baseURL = "https://motherson.axolotlsapps.in/api/";
+    public static string baseURL = "https://mothersonelectric.axolotlsapps.in/api/";
 
     public static string loginAPi = baseURL + "auth/employee_login";
     public static string submitScoreAPi = baseURL + "score/save";

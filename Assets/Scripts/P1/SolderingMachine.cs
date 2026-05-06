@@ -30,7 +30,7 @@ public class SolderingMachine : MonoBehaviour
 
     [Header("Input")]
     public InputActionProperty selectAction;
-
+    public event System.Action onProcessStart;
     public event System.Action onProcessComplete;
 
     private bool isHovered = false;
@@ -59,17 +59,22 @@ public class SolderingMachine : MonoBehaviour
     {
         Tooltip5.SetActive(false);
         if (processCoroutine != null) StopCoroutine(processCoroutine);
-        processCoroutine = StartCoroutine(ProcessSequence(5)); // run 2 times
+        processCoroutine = StartCoroutine(ProcessSequence(2)); // run 2 times
     }
-
+    private bool movedObject1 = false;
     private IEnumerator ProcessSequence(int repeatCount)
     {
+        onProcessStart?.Invoke();
         for (int i = 0; i < repeatCount; i++)
         {
             StepTargets t = stepTargets[i];
 
             // Step 1
-            yield return StartCoroutine(MoveTo(object1, new Vector3(obj1OriginalPos.x, obj1OriginalPos.y, t.object1ZTarget)));
+            if (!movedObject1)
+            {
+                yield return StartCoroutine(MoveTo(object1, new Vector3(obj1OriginalPos.x, obj1OriginalPos.y, t.object1ZTarget)));
+                movedObject1 = true;
+            }
 
             // Step 2
             yield return StartCoroutine(MoveTo(object2, new Vector3(obj2OriginalPos.x, t.object2YTarget, obj2OriginalPos.z)));
@@ -103,8 +108,9 @@ public class SolderingMachine : MonoBehaviour
             yield return StartCoroutine(MoveTo(object2, obj2OriginalPos));
 
             // Step 8
-            yield return StartCoroutine(MoveTo(object1, obj1OriginalPos));
         }
+        yield return StartCoroutine(MoveTo(object1, obj1OriginalPos));
+        movedObject1 = false;
 
         onProcessComplete?.Invoke();
     }

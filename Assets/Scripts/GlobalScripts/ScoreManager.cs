@@ -49,7 +49,7 @@ public class ScoreManager : MonoBehaviour
             }
         }
         scoreValue += _scoreValue;
-        scoreTxt.text = _scoreValue.ToString();
+        scoreTxt.text = scoreValue.ToString();
         SubmitScoreToDB(level, process, _scoreValue.ToString());
 
 
@@ -103,7 +103,9 @@ public class ScoreManager : MonoBehaviour
                 if (response.status == "success")
                 {
                     Debug.Log("Score update success: " + response.data.score);
-                    Msg.instance.DisplayMsg("Score Submitted Successfully!");
+                    Debug.Log("Score " + response.message);
+
+                    //Msg.instance.DisplayMsg("Score Submitted Successfully!");
                 }
                 else
                 {
@@ -129,7 +131,7 @@ public class ScoreManager : MonoBehaviour
         form.AddField("level", level);
         form.AddField("get_score", score);
         form.AddField("total_score", TotalScore);
-        // form.AddField("status", "Pass");
+         form.AddField("status", "Pass");
 
         using (UnityWebRequest request = UnityWebRequest.Post(GameAPIs.totalScoreAPi, form))
         {
@@ -153,11 +155,13 @@ public class ScoreManager : MonoBehaviour
                 if (response.status == "success")
                 {
                     Debug.Log("Score update success: " + response.data.score);
-                    Msg.instance.DisplayMsg("Score Submitted Successfully!");
+                    Debug.Log("Score " + response.message);
+
+                   // Msg.instance.DisplayMsg("Score Submitted Successfully!");
                 }
                 else
                 {
-                    Msg.instance.DisplayMsg(response.message, Color.red);
+                   // Msg.instance.DisplayMsg(response.message, Color.red);
                 }
             }
         }

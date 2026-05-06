@@ -52,6 +52,15 @@ TagManager:
   - RemoteKey
   - RemoteKeyInLaser
   - Button
+  - Chip2
+  - Clip
+  - Tool
+  - Lower
+  - Upper
+  - Screw
+  - ScrewPoint
+  - DrilMachine
+  - UpperOnTable
   layers:
   - Default
   - TransparentFX
